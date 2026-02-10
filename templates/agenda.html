@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>GestarBem • Agenda</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500&family=Barlow+Condensed:wght@700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #ffe9ef;
+      --neutral: #faf7f3;
+      --white: #ffffff;
+      --text: #111111;
+      --muted: rgba(17, 17, 17, 0.65);
+      --radius: 10px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--neutral);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .top-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.9);
+      z-index: 9999;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 9998;
+      padding: 18px 40px;
+      background: transparent;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      background: rgba(255, 233, 239, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(10px);
+    }
+
+    .brand-mini {
+      font-family: "Barlow Condensed", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--text);
+      opacity: 0.9;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-square {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 2px;
+      background: var(--primary);
+      color: #000;
+      border: 1px solid rgba(17, 17, 17, 0.12);
+      font-weight: 500;
+      min-width: 110px;
+      transition: 0.2s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .btn-square:hover {
+      filter: brightness(0.98);
+      transform: translateY(-1px);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px;
+      padding-top: 130px;
+    }
+
+    .title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .month-btn {
+      background: var(--primary);
+      border: 1px solid rgba(17, 17, 17, 0.12);
+      padding: 12px 18px;
+      border-radius: 2px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 15px;
+      color: #000;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      transition: 0.2s ease;
+    }
+
+    .month-btn:hover {
+      filter: brightness(.98);
+      transform: translateY(-1px);
+    }
+
+    .weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      font-size: 12px;
+      text-align: center;
+      margin-bottom: 8px;
+      opacity: 0.6;
+    }
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .day {
+      background: #fff;
+      border-radius: 14px;
+      padding: 10px;
+      min-height: 70px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      border: 1px solid rgba(17, 17, 17, 0.10);
+    }
+
+    .day:hover {
+      transform: translateY(-1px);
+      filter: brightness(0.99);
+    }
+
+    .day.has-event {
+      background: var(--primary);
+    }
+
+    .day span {
+      font-size: 12px;
+      opacity: 0.6;
+    }
+
+    .events {
+      background: #fff;
+      padding: 16px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(17, 17, 17, 0.10);
+    }
+
+    .event {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+
+    button.action {
+      background: var(--primary);
+      border: 1px solid rgba(17, 17, 17, 0.12);
+      padding: 14px;
+      width: 100%;
+      border-radius: 2px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.2s ease;
+    }
+
+    button.action:hover {
+      filter: brightness(0.98);
+      transform: translateY(-1px);
+    }
+
+
+    @media (max-width: 920px) {
+      header {
+        padding: 18px 18px;
+      }
+
+      .container {
+        padding: 20px;
+        padding-top: 130px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-line"></div>
+
+
+  <header>
+    <div class="header-inner">
+      <div class="brand-mini">GestarBem</div>
+
+      <nav>
+        <div class="nav-actions">
+          <a class="btn-square" href="/home">Voltar</a>
+          <a class="btn-square" href="/">Sair</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <div class="title">Minha agenda</div>
+
+    <button class="month-btn" type="button" onclick="trocarMes()">
+      <span id="mesAno"></span>
+    </button>
+
+    <div class="weekdays">
+      <div>SEG</div>
+      <div>TER</div>
+      <div>QUA</div>
+      <div>QUI</div>
+      <div>SEX</div>
+      <div>SÁB</div>
+      <div>DOM</div>
+    </div>
+
+    <div class="calendar" id="calendar"></div>
+
+    <div class="events" id="events">
+      <em>Nenhum compromisso selecionado.</em>
+    </div>
+
+    <button class="action" onclick="novoCompromisso()">Marcar consulta</button>
+
+  </main>
+
+  <script>
+    let dataAtual = new Date();
+    let mes = dataAtual.getMonth();
+    let ano = dataAtual.getFullYear();
+
+    const meses = [
+      "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+      "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
+
+    function render() {
+      document.getElementById("mesAno").innerText = `${meses[mes]} ${ano}`;
+      const cal = document.getElementById("calendar");
+      cal.innerHTML = "";
+
+      const primeiroDia = new Date(ano, mes, 1).getDay();
+      const totalDias = new Date(ano, mes + 1, 0).getDate();
+
+      for (let i = 0; i < (primeiroDia === 0 ? 6 : primeiroDia - 1); i++) {
+        cal.innerHTML += `<div></div>`;
+      }
+
+      for (let d = 1; d <= totalDias; d++) {
+        const key = `${ano}-${mes}-${d}`;
+        const eventos = JSON.parse(localStorage.getItem(key) || "[]");
+
+        const div = document.createElement("div");
+        div.className = "day" + (eventos.length ? " has-event" : "");
+        div.innerHTML = `<strong>${d}</strong><br><span>${eventos[0]?.titulo || ""}</span>`;
+        div.onclick = () => mostrarEventos(key, d);
+
+        cal.appendChild(div);
+      }
+    }
+
+    function mostrarEventos(key, dia) {
+      const box = document.getElementById("events");
+      const eventos = JSON.parse(localStorage.getItem(key) || "[]");
+
+      if (!eventos.length) {
+        box.innerHTML = `<em>Nenhum compromisso para o dia ${dia}.</em>`;
+        return;
+      }
+
+      box.innerHTML = `<strong>Compromissos do dia ${dia}</strong><br><br>`;
+      eventos.forEach(e => {
+        box.innerHTML += `<div class="event">${e.hora} • ${e.titulo}</div>`;
+      });
+    }
+
+    function novoCompromisso() {
+      const titulo = prompt("Título do compromisso:");
+      const data = prompt("Dia do mês:");
+      const hora = prompt("Horário:");
+
+      if (!titulo || !data || !hora) return;
+
+      const key = `${ano}-${mes}-${data}`;
+      const eventos = JSON.parse(localStorage.getItem(key) || "[]");
+      eventos.push({ titulo, hora });
+      localStorage.setItem(key, JSON.stringify(eventos));
+
+      render();
+    }
+
+    function trocarMes() {
+      mes++;
+      if (mes > 11) {
+        mes = 0;
+        ano++;
+      }
+      render();
+    }
+
+    render();
+  </script>
+
+</body>
+
+</html>

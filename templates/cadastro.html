@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>GestarBem • Criar Conta</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+        }
+
+        .auth-container {
+            min-height: 100vh;
+            background: url("../static/img/fotosapatos.png") center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 40px;
+        }
+
+        .decor-box {
+            position: absolute;
+            left: 10%;
+            width: 260px;
+            height: 260px;
+            background: #ffd4e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-img {
+            position: absolute;
+            z-index: 3;
+            width: 190px;
+            height: 190px;
+            object-fit: cover;
+            border-radius: 6px;
+            display: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .upload-box {
+            position: absolute;
+            z-index: 2;
+            cursor: pointer;
+            text-align: center;
+            font-size: 14px;
+            color: #444;
+            font-family: 'Barlow', sans-serif;
+        }
+
+        .upload-box span {
+            font-weight: 600;
+        }
+
+        .upload-box small {
+            font-size: 12px;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        .upload-box input {
+            display: none;
+        }
+
+        .auth-form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 50px 45px;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 8px;
+            z-index: 2;
+            animation: fadeSlide 0.9s ease forwards;
+        }
+
+        .auth-form h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 13px;
+            margin-bottom: 30px;
+            font-family: 'Barlow', sans-serif;
+            font-weight: 400;
+        }
+
+        .subtitle a {
+            color: #000;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .auth-form label {
+            font-size: 11px;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .auth-form input {
+            width: 100%;
+            margin: 6px 0 18px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            font-family: 'Barlow', sans-serif;
+            font-size: 13px;
+        }
+
+        .auth-form button {
+            width: 100%;
+            padding: 12px;
+            background: #ffe1ea;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .decor-box {
+                display: none;
+            }
+
+            .auth-container {
+                padding: 20px;
+            }
+
+            .auth-form {
+                padding: 35px 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="auth-container">
+
+        <div class="decor-box">
+            <img id="preview" class="preview-img" alt="Foto do usuário">
+
+            <label class="upload-box">
+                <span>
+                    Upload de imagem<br>
+                    <small>(opcional)</small>
+                </span>
+                <input id="foto" type="file" accept="image/*" onchange="previewImagem(event)">
+            </label>
+        </div>
+
+        <form class="auth-form" id="formCadastro">
+            <h1>CRIAR CONTA</h1>
+
+            <p class="subtitle">
+                Já possui cadastro? <a href="/login">Login</a>
+            </p>
+
+            <label for="nome">NOME</label>
+            <input id="nome" name="nome" type="text" placeholder="Seu nome completo" required>
+
+            <label for="email">EMAIL</label>
+            <input id="email" name="email" type="email" placeholder="email@exemplo.com" required>
+
+            <label for="telefone">TELEFONE</label>
+            <input id="telefone" name="telefone" type="tel" placeholder="(00) 00000-0000">
+
+            <label for="semana_gestacional">SEMANA GESTACIONAL</label>
+            <input id="semana_gestacional" name="semana_gestacional" type="number" min="1" max="42" placeholder="Ex: 20"
+                required>
+
+            <label for="senha">SENHA</label>
+            <input id="senha" name="senha" type="password" placeholder="••••••" required>
+
+            <label for="confirmarSenha">CONFIRMAR SENHA</label>
+            <input id="confirmarSenha" name="confirmarSenha" type="password" placeholder="••••••" required>
+
+            <button type="submit">Criar conta</button>
+        </form>
+
+    </main>
+
+    <script>
+        function previewImagem(event) {
+            const img = document.getElementById("preview");
+            img.src = URL.createObjectURL(event.target.files[0]);
+            img.style.display = "block";
+        }
+
+        document.getElementById("formCadastro").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const nome = document.getElementById("nome").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const telefone = document.getElementById("telefone").value.trim();
+            const semana = Number(document.getElementById("semana_gestacional").value);
+            const senha = document.getElementById("senha").value;
+            const confirmar = document.getElementById("confirmarSenha").value;
+
+            if (senha !== confirmar) {
+                alert("As senhas não coincidem.");
+                return;
+            }
+
+            if (!Number.isInteger(semana) || semana < 1 || semana > 42) {
+                alert("Semana gestacional inválida. Use um número entre 1 e 42.");
+                return;
+            }
+
+            try {
+                const resp = await fetch("http://127.0.0.1:5000/api/cadastro", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        nome,
+                        email,
+                        telefone,
+                        semana_gestacional: semana,
+                        senha
+                    })
+                });
+
+                const data = await resp.json();
+
+                if (!resp.ok) {
+                    alert(data.message || "Erro ao cadastrar.");
+                    return;
+                }
+
+                alert(data.message || "Cadastro realizado com sucesso!");
+                window.location.href = "/login";
+            } catch (err) {
+                alert("Não consegui conectar no servidor. Verifique se o app.py está rodando.");
+            }
+        });
+    </script>
+
+</body>
+
+</html>

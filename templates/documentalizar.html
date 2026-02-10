@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>GestarBem • Documentos</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500&family=Barlow+Condensed:wght@700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #ffe9ef;
+      --neutral: #faf7f3;
+      --white: #ffffff;
+      --text: #111111;
+      --muted: rgba(17, 17, 17, 0.65);
+      --radius: 10px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--neutral);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .top-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.9);
+      z-index: 9999;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 9998;
+      padding: 18px 40px;
+      background: transparent;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      background: rgba(255, 233, 239, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(10px);
+    }
+
+    .brand-mini {
+      font-family: "Barlow Condensed", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      opacity: 0.9;
+      user-select: none;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-square {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 2px;
+      background: var(--primary);
+      color: #000;
+      border: 1px solid rgba(17, 17, 17, 0.12);
+      font-weight: 500;
+      min-width: 110px;
+      transition: 0.2s ease;
+    }
+
+    .btn-square:hover {
+      filter: brightness(.98);
+      transform: translateY(-1px);
+    }
+
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px;
+      padding-top: 130px;
+    }
+
+    .title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .categories {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      margin-bottom: 24px;
+    }
+
+    .category {
+      background: var(--primary);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      white-space: nowrap;
+      border: 1px solid rgba(17,17,17,.10);
+    }
+
+    .docs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .doc-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 16px;
+      border: 1px solid rgba(17,17,17,.10);
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .doc-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .doc-card small {
+      font-size: 12px;
+      opacity: .6;
+    }
+
+    .empty {
+      text-align: center;
+      opacity: .7;
+      margin-top: 40px;
+    }
+
+    .empty button {
+      margin-top: 14px;
+      background: var(--primary);
+      border: 1px solid rgba(17,17,17,.12);
+      padding: 12px 18px;
+      border-radius: 2px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .fab {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--primary);
+      font-size: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 1px solid rgba(17,17,17,.12);
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="top-line"></div>
+
+<header>
+  <div class="header-inner">
+    <div class="brand-mini">GestarBem</div>
+    <div class="nav-actions">
+      <a class="btn-square" href="/home">Voltar</a>
+      <a class="btn-square" href="/">Sair</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <div class="title">Documentos</div>
+  <div class="subtitle">
+    Guarde seus exames e arquivos importantes em um só lugar.
+  </div>
+
+  <div class="categories">
+    <div class="category">Exames</div>
+    <div class="category">Ultrassons</div>
+    <div class="category">Consultas</div>
+    <div class="category">Receitas médicas</div>
+    <div class="category">Outros</div>
+  </div>
+
+  <div class="docs" id="docs"></div>
+
+  <div class="empty" id="empty">
+    <p>Você ainda não adicionou nenhum documento.</p>
+    <p>Aqui você pode guardar exames, receitas e arquivos importantes.</p>
+    <button onclick="addDocumento()">Adicionar primeiro documento</button>
+  </div>
+
+</main>
+
+<div class="fab" onclick="addDocumento()">+</div>
+
+<script>
+  let documentos = JSON.parse(localStorage.getItem("documentos") || "[]");
+
+  function render() {
+    const box = document.getElementById("docs");
+    const empty = document.getElementById("empty");
+
+    box.innerHTML = "";
+
+    if (!documentos.length) {
+      empty.style.display = "block";
+      return;
+    }
+
+    empty.style.display = "none";
+
+    documentos.forEach((d, i) => {
+      box.innerHTML += `
+        <div class="doc-card" onclick="ver(${i})">
+          <strong>${d.nome}</strong><br>
+          <small>${d.tipo} • ${d.data}</small><br>
+          <small>${d.info}</small>
+        </div>
+      `;
+    });
+  }
+
+  function addDocumento() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.pdf,.jpg,.jpeg,.png,.doc,.docx';
+    input.onchange = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('tipo', prompt('Tipo do documento:') || 'Outros');
+
+      try {
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        
+        if (res.ok) {
+          documentos.push({
+            nome: file.name,
+            tipo: data.tipo,
+            data: new Date().toLocaleDateString('pt-BR'),
+            info: data.filename,
+            url: data.url
+          });
+          localStorage.setItem('documentos', JSON.stringify(documentos));
+          render();
+          alert('Documento enviado com sucesso!');
+        } else {
+          alert('Erro ao enviar: ' + data.message);
+        }
+      } catch (err) {
+        alert('Erro ao enviar documento');
+      }
+    };
+    input.click();
+  }
+
+  function ver(i) {
+    const d = documentos[i];
+    if (d.url) {
+      const action = confirm(
+        `${d.nome}\n\nTipo: ${d.tipo}\nData: ${d.data}\n\nOK = Abrir | Cancelar = Excluir`
+      );
+      if (action) {
+        window.open(d.url, '_blank');
+      } else {
+        documentos.splice(i, 1);
+        localStorage.setItem('documentos', JSON.stringify(documentos));
+        render();
+      }
+    } else {
+      const ok = confirm(`${d.nome}\n\nDeseja excluir?`);
+      if (ok) {
+        documentos.splice(i, 1);
+        localStorage.setItem('documentos', JSON.stringify(documentos));
+        render();
+      }
+    }
+  }
+
+  render();
+</script>
+
+</body>
+</html>

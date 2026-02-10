@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>GestarBem • Home</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500&family=Barlow+Condensed:wght@700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: #faf7f3;
+            color: #111;
+        }
+
+        .top-line {
+            height: 2px;
+            background: #ffffff;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        header {
+            padding: 18px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-btn {
+            font-size: 26px;
+            opacity: 0.6;
+            user-select: none;
+        }
+
+        .logout {
+            background: #ffe9ef;
+            color: #000;
+            padding: 8px 18px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .container {
+            padding: 24px;
+            padding-top: 10px;
+            max-width: 900px;
+        }
+
+        h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 32px;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            opacity: 0.7;
+            margin-bottom: 12px;
+        }
+
+        .status {
+            font-size: 14px;
+            margin-bottom: 26px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .info-card {
+            background: #ffe9ef;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        .mini-section {
+            background: #ffffff;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .fab {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            background: #ffe9ef;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-line"></div>
+
+    <header>
+        <span class="menu-btn">☰</span>
+
+        <a href="/" class="logout">Sair</a>
+    </header>
+
+    <main class="container">
+
+
+        <h1>Olá, <span id="nome">Fulano</span> </h1>
+        <div class="subtitle">O que você gostaria de fazer hoje?</div>
+
+        <div class="status">
+            Semana gestacional: <strong><span id="semana">20</span>ª semana</strong><br>
+            Próxima consulta: <em>Sem consulta marcada</em>
+        </div>
+
+        <div class="cards">
+            <div class="card" onclick="location.href='/documentos'">Documentos</div>
+            <div class="card" onclick="location.href='/listas'">Listas</div>
+            <div class="card" onclick="location.href='/agenda'">Agenda</div>
+        </div>
+
+        <div class="info-card">
+            <strong>Curiosidade da semana</strong>
+            <p id="curiosity"></p>
+        </div>
+
+        <div class="mini-section">
+            <strong>Dica da semana</strong>
+            <p>Organize seus exames por data para facilitar consultas.</p>
+        </div>
+
+        <div class="mini-section">
+            <strong>Como você está se sentindo hoje?</strong><br>
+            😊 😴 🤢 😣
+        </div>
+
+    </main>
+
+
+    <div class="fab" onclick="window.location.href='/listas'">+</div>
+
+    <script>
+        const user = {
+            nome: "Fulano",
+            semana: 20
+        };
+
+        document.getElementById("nome").innerText = user.nome;
+        document.getElementById("semana").innerText = user.semana;
+
+
+        const curiosidades = [
+            "Nesta fase, o bebê já reage a estímulos externos.",
+            "O corpo da mãe começa a se preparar para o parto.",
+            "É comum sentir mais cansaço e alterações no sono."
+        ];
+
+        let i = 0;
+        const curiosity = document.getElementById("curiosity");
+
+        function trocarCuriosidade() {
+            curiosity.innerText = curiosidades[i];
+            i = (i + 1) % curiosidades.length;
+        }
+
+        trocarCuriosidade();
+        setInterval(trocarCuriosidade, 5000);
+    </script>
+
+</body>
+
+</html>

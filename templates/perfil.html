@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>GestarBem • Perfil</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500&family=Barlow+Condensed:wght@700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #ffe9ef;
+            --neutral: #faf7f3;
+            --white: #ffffff;
+            --text: #111111;
+            --muted: rgba(17, 17, 17, 0.65);
+            --radius: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: var(--neutral);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .top-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 9999;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9998;
+            padding: 18px 40px;
+            background: transparent;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 12px 16px;
+            border-radius: var(--radius);
+            background: rgba(255, 233, 239, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(10px);
+        }
+
+        .brand-mini {
+            font-family: "Barlow Condensed", sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: var(--text);
+            opacity: 0.9;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn-square {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 18px;
+            border-radius: 2px;
+            background: var(--primary);
+            color: #000;
+            border: 1px solid rgba(17, 17, 17, 0.12);
+            font-weight: 500;
+            min-width: 110px;
+            transition: 0.2s ease;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .btn-square:hover {
+            filter: brightness(0.98);
+            transform: translateY(-1px);
+        }
+
+        .profile-top {
+            background: var(--primary);
+            padding: 48px 20px 30px;
+            text-align: center;
+            margin-top: 90px;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: #ffffff;
+            margin: 0 auto 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(17, 17, 17, .10);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .name {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 26px;
+            margin-bottom: 6px;
+        }
+
+        .hint {
+            font-size: 13px;
+            opacity: 0.75;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        .container {
+            padding: 24px;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: #ffffff;
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            border: 1px solid rgba(17, 17, 17, .10);
+        }
+
+        .section h2 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        label {
+            font-size: 11px;
+            letter-spacing: 1px;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 14px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-family: 'Barlow', sans-serif;
+            font-size: 13px;
+            background: rgba(250, 247, 243, 0.65);
+        }
+
+        .micro {
+            font-size: 12px;
+            opacity: 0.6;
+            margin-top: -6px;
+            margin-bottom: 14px;
+        }
+
+        .photo-info {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+
+        .photo-btn {
+            background: #f1f1f1;
+            color: #555;
+            padding: 8px 14px;
+            border-radius: 4px;
+            font-size: 13px;
+            border: none;
+            cursor: not-allowed;
+        }
+
+        .save-btn {
+            width: 100%;
+            background: var(--primary);
+            border: 1px solid rgba(17, 17, 17, .12);
+            padding: 14px;
+            border-radius: 2px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+            transition: .2s ease;
+        }
+
+        .save-btn:hover {
+            filter: brightness(.98);
+            transform: translateY(-1px);
+        }
+
+        .success {
+            display: none;
+            text-align: center;
+            font-size: 13px;
+            margin-top: 14px;
+            color: #4a7c59;
+        }
+
+        @media (max-width: 920px) {
+            header {
+                padding: 18px 18px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-line"></div>
+
+    <header>
+        <div class="header-inner">
+            <div class="brand-mini">GestarBem</div>
+
+            <nav>
+                <div class="nav-actions">
+                    <a class="btn-square" href="/home">Voltar</a>
+                    <a class="btn-square" href="/">Sair</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="profile-top">
+        <div class="avatar">
+            <img src="static/img/foto_perfil.png" alt="Foto de perfil">
+        </div>
+
+        <div class="name" id="nomeTopo">Fulano</div>
+
+        <p class="hint">
+            Essas informações são privadas e podem ser alteradas a qualquer momento.
+        </p>
+    </div>
+
+    <main class="container">
+
+        <div class="section">
+            <p class="photo-info">
+                Sua foto de perfil aparece na tela inicial do GestarBem.
+            </p>
+            <button class="photo-btn" disabled>Alterar foto</button>
+        </div>
+
+        <div class="section">
+            <h2>Dados pessoais</h2>
+
+            <label>NOME</label>
+            <input id="nome" type="text">
+
+            <label>E-MAIL</label>
+            <input id="email" type="email">
+
+            <label>TELEFONE</label>
+            <input id="telefone" type="tel">
+
+            <p class="micro">
+                Usamos essas informações apenas para acesso e comunicação.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Segurança</h2>
+
+            <label>NOVA SENHA</label>
+            <input type="password" placeholder="••••••">
+
+            <label>CONFIRMAR NOVA SENHA</label>
+            <input type="password" placeholder="••••••">
+
+            <p class="micro">
+                Utilize uma senha segura para proteger seus dados.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Gestação</h2>
+
+            <label>SEMANA GESTACIONAL</label>
+            <input id="semana" type="number" min="1" max="42">
+
+            <p class="micro">
+                Essa informação personaliza conteúdos e curiosidades exibidas no GestarBem.
+            </p>
+        </div>
+
+        <button class="save-btn" onclick="salvar()">Salvar alterações</button>
+        <div class="success" id="successMsg">Alterações salvas com sucesso</div>
+
+    </main>
+
+    <script>
+        const user = {
+            nome: "Fulano",
+            email: "email@exemplo.com",
+            telefone: "(00) 00000-0000",
+            semana: 20
+        };
+
+        document.getElementById("nome").value = user.nome;
+        document.getElementById("email").value = user.email;
+        document.getElementById("telefone").value = user.telefone;
+        document.getElementById("semana").value = user.semana;
+        document.getElementById("nomeTopo").innerText = user.nome;
+
+        function salvar() {
+            document.getElementById("successMsg").style.display = "block";
+            setTimeout(() => {
+                document.getElementById("successMsg").style.display = "none";
+            }, 3000);
+        }
+    </script>
+
+</body>
+
+</html>
